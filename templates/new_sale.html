@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container py-4">
+    <div class="row">
+        <div class="col-8">
+            <h1>New Sale</h1>
+            <table class="table table-striped my-3">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Product 1</td>
+                        <td>100</td>
+                        <td>2</td>
+                        <td>200</td>
+                    </tr>
+                    <tr>
+                        <td>Product 2</td>
+                        <td>200</td>
+                        <td>1</td>
+                        <td>200</td>
+                    </tr>
+                    <tr>
+                        <td>Product 3</td>
+                        <td>300</td>
+                        <td>3</td>
+                        <td>900</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold mx-auto" colspan="3">Total</td>
+                        <td class="fw-bold">1100</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-4">
+            <h2 class="mb-3">Find Product</h2>
+            <form class="mb-3">
+                <div class="mb-3">
+                    <input name="product_name" type="text" class="form-control" id="product_name" placeholder="Product Name">
+                </div>
+                <div class="mb-3">
+                    <input name="product_price" type="number" class="form-control" id="product_price" placeholder="Product Price">
+                </div>
+                <div class="mb-3">
+                    <input name="product_quantity" type="number" class="form-control" id="product_quantity" placeholder="Product Quantity">
+                </div>
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-warning">Add Product</button>
+                </div>
+            </form>
+            <div class="card">
+                <div class="card-header">
+                    <h3>Commission</h3>
+                </div>
+                <div class="card-body text-center">
+                    <h3>110</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
