@@ -12,7 +12,7 @@ def index():
     '''
     Render employee template for /employee route
     '''
-    pass
+    return render_template('employee_home.html')
 
 
 @employee.route('/new_sale')
