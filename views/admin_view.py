@@ -12,4 +12,4 @@ def dashboard():
     '''
     Render admin template for /admin/dashboard route
     '''
-    return render_template('dashboard.html')
+    return render_template('admin_dashboard.html')

@@ -48,7 +48,7 @@ class BaseModel(Base):
         '''
         return session.query(self.__class__).get(id)
 
-    def update(self):
+    def save(self):
         '''
         Update a record.
         '''
