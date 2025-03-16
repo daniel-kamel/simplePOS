@@ -6,6 +6,7 @@ from sqlalchemy.orm import relationship
 Implementation of the Employee model.
 '''
 
+
 class Employee(BaseModel):
     '''
     Employee model.

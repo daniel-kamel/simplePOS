@@ -32,7 +32,10 @@ class BaseModel(Base):
 
     id = Column(Integer, primary_key=True, autoincrement=True, nullable=False)
     created_at = Column(DATETIME, default=datetime.utcnow, nullable=False)
-    updated_at = Column(DATETIME, default=datetime.utcnow, onupdate=datetime.utcnow, nullable=False)
+    updated_at = Column(DATETIME,
+                        default=datetime.utcnow,
+                        onupdate=datetime.utcnow,
+                        nullable=False)
 
     def create(self):
         '''
