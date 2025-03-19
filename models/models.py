@@ -16,7 +16,7 @@ class Employee(BaseModel):
     admin = Column(Boolean, nullable=False, default=False)
     salary = Column(Integer, nullable=False)
     commission = Column(Boolean, nullable=False, default=False)
-    commision_rate = Column(Integer)
+    commission_rate = Column(Integer)
     sales = relationship('Sale', back_populates='employee', lazy=True)
 
     def calculate_commission(self):
@@ -83,7 +83,7 @@ class Sale(BaseModel):
     '''
     __tablename__ = 'sales'
     employee_id = Column(Integer, ForeignKey('employees.id'), nullable=False)
-    total = Column(Integer, nullable=False, default=0)
+    total = Column(Integer, default=0)
     employee = relationship('Employee', back_populates='sales', lazy=True)
     products = relationship('Product', back_populates='sales', secondary='product_sales', lazy=True)
 
@@ -101,6 +101,13 @@ class Sale(BaseModel):
                 session.add(product_sale)
                 session.flush()
                 self.total += product.price * quantity
+
+    def employee_commission(self):
+        '''
+        Calculate the commission for the employee.
+        '''
+        commission = self.total * (self.employee.commission_rate / 100)
+        return commission
 
     def __repr__(self):
         '''
