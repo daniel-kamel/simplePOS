@@ -8,7 +8,7 @@ Initialize database connection and create the base class for all models.
 
 # Database configuration
 user = 'simplepos_usr'
-password = 'simplepos_pwd'
+password = 'simplepos_PWD'
 host = 'localhost'
 port = '3306'
 db = 'simplepos'
@@ -37,7 +37,7 @@ class BaseModel(Base):
                         onupdate=datetime.utcnow,
                         nullable=False)
 
-    def create(self):
+    def save(self):
         '''
         Create a new record.
         '''
@@ -50,13 +50,6 @@ class BaseModel(Base):
         Get a record by id.
         '''
         return session.query(self.__class__).get(id)
-
-    def save(self):
-        '''
-        Update a record.
-        '''
-        session.commit()
-        return self
 
     def delete(self):
         '''

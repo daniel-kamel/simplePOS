@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-from models.basemodel import BaseModel
+from models.basemodel import BaseModel, session
 from sqlalchemy import Column, String, Integer, Boolean, ForeignKey
 from sqlalchemy.orm import relationship
 '''
@@ -41,10 +41,11 @@ class Employee(BaseModel):
         return f'<Employee[{self.id}] {self.name}>'
 
 
-class product_sale(BaseModel):
+class ProductSale(BaseModel):
     __tablename__ = 'product_sales'
-    product_id = Column(Integer, ForeignKey('products.id'), primary_key=True)
-    sale_id = Column(Integer, ForeignKey('sales.id'), primary_key=True)
+    product_id = Column(Integer, ForeignKey('products.id'))
+    sale_id = Column(Integer, ForeignKey('sales.id'))
+    quantity = Column(Integer, nullable=False, default=1)
 
 class Product(BaseModel):
     '''
@@ -53,7 +54,27 @@ class Product(BaseModel):
     __tablename__ = 'products'
     name = Column(String(128), nullable=False)
     price = Column(Integer, nullable=False)
-    sales = relationship('Sale', back_populates='product', secondary=product_sale, lazy=True)
+    sales = relationship('Sale', back_populates='products', secondary='product_sales', lazy=True)
+
+    def __init__(self, name, price):
+        '''
+        Initialize a Product object.
+        '''
+        self.name = name.title()
+        self.price = price
+
+    def get_product(self, name):
+        '''
+        Get a product by name.
+        '''
+        product = self.query.filter_by(name=name.title()).first()
+        return product
+
+    def __repr__(self):
+        '''
+        Return a string representation of the Product object.
+        '''
+        return f'<Product[{self.id}] {self.name}>'
 
 
 class Sale(BaseModel):
@@ -62,6 +83,27 @@ class Sale(BaseModel):
     '''
     __tablename__ = 'sales'
     employee_id = Column(Integer, ForeignKey('employees.id'), nullable=False)
-    quantity = Column(Integer, nullable=False)
+    total = Column(Integer, nullable=False, default=0)
     employee = relationship('Employee', back_populates='sales', lazy=True)
-    products = relationship('Product', back_populates='sales', secondary=product_sale, lazy=True)
+    products = relationship('Product', back_populates='sales', secondary='product_sales', lazy=True)
+
+    def __init__(self, employee_id, product_data):
+        '''
+        Initialize a Sale object.
+        '''
+        self.employee_id = employee_id
+        self.total = 0
+        session.add(self)
+        session.flush()
+        if product_data is not None:
+            for product, quantity in product_data.items():
+                product_sale = ProductSale(product_id=product.id, sale_id=self.id, quantity=quantity)
+                session.add(product_sale)
+                session.flush()
+                self.total += product.price * quantity
+
+    def __repr__(self):
+        '''
+        Return a string representation of the Sale object.
+        '''
+        return f'<Sale[{self.id}] seller: {self.employee.name}>'
