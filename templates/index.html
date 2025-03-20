@@ -11,38 +11,32 @@
     <nav class="navbar navbar-expand-md navbar-light bg-warning">
         <div class="container">
             <a class="navbar-brand fw-bold fs-1" href="/">SimplePOS</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav fs-4">
-                    {% if admin==True %}
-                    <li class="nav-item">
-                        <a class="nav-link fw-bold" href="/admin/dashboard">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link fw-bold" href="/admin/products">Products</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link fw-bold" href="/admin/employees">Employees</a>
-                    </li>
-                    {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link fw-bold" href="/employee/dashboard">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link fw-bold" href="/employee/sales">My Sales</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link fw-bold" href="/employee/new-sale">Products</a>
-                    </li>
-                    {% endif %}
-                </ul>
-            </div>
         </div>
     </nav>
-    <div class="container py-4 mb-auto">
-        {% block content %}{% endblock %}
+    <div class="container py-4 mb-auto d-flex flex-column align-items-center">
+        <h1 class="m-3 text-center">Choose an Employee</h1>
+        <div class="d-inline-flex justify-content-center gap-5">
+            <div class="card m-5" style="width: 18rem;">
+                <div class="card-header card-title p-3 text-center">
+                    <h1>Admin</h1>
+                </div>
+                <div class="card-body p-2 position-relative">
+                    <div class="text-center">
+                        <a href="/admin/dashboard">Go to Admin Home</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card m-5" style="width: 18rem;">
+                <div class="card-header card-title p-3 text-center">
+                    <h1>Employee</h1>
+                </div>
+                <div class="card-body p-2 position-relative">
+                    <div class="text-center">
+                        <a href="/employee/">Go to Admin Home</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <footer class="bg-warning text-center w-100 pt-2">
         <div class="container">

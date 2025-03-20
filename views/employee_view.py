@@ -15,7 +15,7 @@ def index():
     return render_template('employee_home.html')
 
 
-@employee.route('/new_sale')
+@employee.route('/new-sale')
 def new_sale():
     '''
     Render employee template for /employee/new_sale route
