@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container py-4">
+    <h1>Employees</h1>
+    <div class="block px-2" style="max-width: 75%;">
+        <table class="table table-striped my-3">
+            <thead>
+                <tr>
+                    <th>Employee ID</th>
+                    <th>Name</th>
+                    <th>Admin Status</th>
+                    <th>Earnings</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for employee in employees %}
+                <tr>
+                    <td>{{ employee.id }}</td>
+                    <td>{{ employee.name }}</td>
+                    <td>{{ employee.admin }}</td>
+                    <td>{{ employee.calculate_earnings() }}</td>
+                    <td>
+                        <a href="/admin/employees/{{ employee.id }}/edit" class="btn btn-warning">Edit</a>
+                        <a href="/admin/employees/{{ employee.id }}/delete" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <button type="button" class="btn btn-warning"><a href="/admin/employees/new" class="text-black text-decoration-none">Add Employee</a></button>
+    </div>
+</div>
+{% endblock %}
