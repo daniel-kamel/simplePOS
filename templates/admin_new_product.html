@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container py-4">
+    <h1>New Product</h1>
+    <div class="block px-2" style="max-width: 75%;">
+        <form method="POST" action="/admin/products/new">
+            <div class="form-group mb-3">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+            </div>
+            <div class="form-group mb-3">
+                <label for="price">Price</label>
+                <input type="number" class="form-control" id="price" name="price" required>
+            </div>
+            <button type="submit" class="btn btn-warning">Create</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

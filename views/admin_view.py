@@ -49,3 +49,34 @@ def delete_employee(employee_id):
     employee = session.query(Employee).get(employee_id)
     employee.delete()
     return redirect(url_for('admin.employees'))
+
+@admin.route('/products')
+def products():
+    '''
+    Render admin template for /admin/products route
+    '''
+    products = session.query(Product).all()
+    return render_template('admin_products.html', admin=True, products=products)
+
+@admin.route('/products/new', methods=['GET', 'POST'])
+def new_product():
+    '''
+    Render admin template for /admin/products/new route
+    '''
+    if request.method == 'POST':
+        name = request.form.get('name')
+        price = request.form.get('price')
+        product = Product(name=name, price=price)
+        product.save()
+        return redirect(url_for('admin.products'))
+    else:
+        return render_template('admin_new_product.html', admin=True)
+
+@admin.route('/products/<int:product_id>/delete', methods=['POST', 'GET'])
+def delete_product(product_id):
+    '''
+    Delete a product
+    '''
+    product = session.query(Product).get(product_id)
+    product.delete()
+    return redirect(url_for('admin.products'))

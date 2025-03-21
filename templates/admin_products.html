@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container py-4">
+        <h1>Products</h1>
+        <div class="block px-2" style="max-width: 75%;">
+            <table class="table table-striped my-3 fs-5 table-bordered">
+                <thead>
+                    <tr>
+                        <th class="col-1">ID</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th class="col-1">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for product in products %}
+                    <tr>
+                        <td>{{ product.id }}</td>
+                        <td>{{ product.name }}</td>
+                        <td>{{ product.price }}</td>
+                        <td>
+                            <a href="/admin/products/{{ product.id }}/delete" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <button type="button" class="btn btn-warning"><a href="/admin/products/new" class="text-black text-decoration-none">Add Product</a></button>
+        </div>
+    </div>
+{%  endblock %}
