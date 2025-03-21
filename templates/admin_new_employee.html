@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container py-4">
+    <h1>New Employee</h1>
+    <div class="px-2 d-flex justify-content-center">
+        <div class=" d-grid gap-2 fs-5">
+            <form method="POST">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="name" name="name" required>
+                </div>
+                <div class="mb-3">
+                    <label for="salary" class="form-label">Salary</label>
+                    <input type="number" class="form-control" id="salary" name="salary" required>
+                </div>
+                <div class="mb-3 form-check form-switch">
+                    <input type="checkbox" class="form-check-input" id="commission" name="commission">
+                    <label class="form-check-label" for="commission">Commission</label>
+                </div>
+                <div class="mb-3">
+                    <label for="commission_rate" class="form-label">Commission Rate</label>
+                    <input type="number" class="form-control" id="commission_rate" name="commission_rate">
+                </div>
+                <div class="mb-3 form-check form-switch">
+                    <input type="checkbox" class="form-check-input" id="admin" name="admin">
+                    <label class="form-check-label" for="admin">Admin</label>
+                </div>
+                <button type="submit" class="btn btn-inline btn-warning">Create</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

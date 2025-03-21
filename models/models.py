@@ -24,7 +24,7 @@ class Employee(BaseModel):
         Calculate the commission for the employee.
         '''
         total_sales = sum(sale.total for sale in self.sales)
-        commission = total_sales * (self.commision_rate / 100)
+        commission = total_sales * (self.commission_rate / 100)
         return commission
 
     def calculate_earnings(self):
