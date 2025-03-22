@@ -63,11 +63,12 @@ class Product(BaseModel):
         self.name = name.title()
         self.price = price
 
-    def get_product(self, name):
+    @staticmethod
+    def get_product(name):
         '''
         Get a product by name.
         '''
-        product = self.query.filter_by(name=name.title()).first()
+        product = session.query(Product).filter_by(name=name.title()).first()
         return product
 
     def __repr__(self):
