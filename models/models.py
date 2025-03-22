@@ -91,6 +91,8 @@ class Sale(BaseModel):
     def __init__(self, employee_id, product_data):
         '''
         Initialize a Sale object.
+        employee_id: ID of the employee who made the sale
+        product_data: Dictionary containing product data in the sale
         '''
         self.employee_id = employee_id
         self.total = 0
