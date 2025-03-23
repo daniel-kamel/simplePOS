@@ -27,7 +27,7 @@ def new_sale():
     '''
     products_list = session.query(Product).all()
     total = sum(product['total'] for product in CART) if CART else 0
-    return render_template('new_sale.html', products_list=products_list, cart=CART, total=total)
+    return render_template('employee_new-sale.html', products_list=products_list, cart=CART, total=total)
 
 
 @employee.route('/sale/add-product', methods=['POST'])
@@ -68,3 +68,11 @@ def save_sale():
     sale.save()
     CART.clear()
     return redirect(url_for('employee.new_sale'))
+
+@employee.route('/sales', methods=['POST', 'GET'])
+def sales():
+    '''
+    Render employee template for /employee/sales route
+    '''
+    sales_list = session.query(Sale).all()
+    return render_template('employee_sales.html', sales_list=sales_list)
