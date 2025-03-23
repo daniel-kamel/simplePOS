@@ -17,7 +17,12 @@ def index():
     '''
     Render employee template for /employee route
     '''
-    return render_template('employee_home.html')
+    total_sales = sum(sale.total for sale in session.query(Sale).all())
+    total_commission = 0
+    for sale in session.query(Sale).all():
+        total_commission += sale.employee_commission()
+    best_sale = session.query(Sale).order_by(Sale.total.desc()).first()
+    return render_template('employee_home.html', total_sales=total_sales, total_commission=total_commission, best_sale=best_sale.total)
 
 
 @employee.route('/new-sale')
