@@ -1,47 +1,29 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="grid py-1 text-center">
-    <div class="row g-5 px-5 m-2">
-        <div class="col px-5">
-            <div class="card">
-                <div class="card-header">
-                    <h3>Best Selling Employee</h3>
-                </div>
-                <div class="card-body text-center">
-                    <h3>Employee 1</h3>
-                </div>
+    <div class="d-inline-flex">
+        <div class="card m-5">
+            <div class="card-header">
+                <h3>Top Employee</h3>
+            </div>
+            <div class="card-body text-center">
+                <h3>{{ top_employee }}</h3>
             </div>
         </div>
-        <div class="col px-5">
-            <div class="card">
-                <div class="card-header">
-                    <h3>Most profitable Employee</h3>
-                </div>
-                <div class="card-body text-center">
-                    <h3>Employee 3</h3>
-                </div>
+        <div class="card m-5">
+            <div class="card-header">
+                <h3>Top Product</h3>
+            </div>
+            <div class="card-body text-center">
+                <h3>{{ top_product }}</h3>
             </div>
         </div>
-    </div>
-    <div class="row g-5 px-5 m-2">
-        <div class="col px-5">
-            <div class="card">
-                <div class="card-header">
-                    <h3>Best Selling Product</h3>
-                </div>
-                <div class="card-body text-center">
-                    <h3>Product 1</h3>
-                </div>
+        <div class="card m-5">
+            <div class="card-header">
+                <h3>Top Sale</h3>
             </div>
-        </div>
-        <div class="col px-5">
-            <div class="card">
-                <div class="card-header">
-                    <h3>Most profitable Product</h3>
-                </div>
-                <div class="card-body text-center">
-                    <h3>Product 3</h3>
-                </div>
+            <div class="card-body text-center">
+                <h3>{{ top_sale }}</h3>
             </div>
         </div>
     </div>

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 from flask import Blueprint, render_template, request, redirect, url_for
 from models.basemodel import session
-from models.models import Employee, Product, Sale
+from models.models import Employee, Product, Sale, ProductSale
 '''
 Admin view for the SimplePOS application
 '''
@@ -14,7 +14,26 @@ def dashboard():
     '''
     Render admin template for /admin/dashboard route
     '''
-    return render_template('admin_dashboard.html', admin=True)
+    # Get the top employee
+    employees_sales = {}
+    employees = session.query(Employee).all()
+    for employee in employees:
+        total_sales = sum(sale.total for sale in employee.sales)
+        employees_sales[total_sales] = employee
+    max_sales = max(employees_sales.keys())
+    top_employee = employees_sales[max_sales].name
+    # Get the top product
+    product_sales = {}
+    for product in session.query(Product).all():
+        product_totals = session.query(ProductSale).filter(ProductSale.product_id == product.id).all()
+        total_sales = sum(product_total.quantity for product_total in product_totals)
+        product_sales[total_sales] = product
+    max_sales = max(product_sales.keys())
+    top_product = product_sales[max_sales].name
+    # Get the top sale
+    sales = session.query(Sale).all()
+    top_sale = max(sale.total for sale in sales)
+    return render_template('admin_dashboard.html', admin=True, top_employee=top_employee, top_product=top_product, top_sale=top_sale)
 
 @admin.route('/employees')
 def employees():
